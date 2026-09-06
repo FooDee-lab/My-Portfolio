@@ -1,68 +1,100 @@
-import Image from "next/image";
+"use client";
+
+import {
+  ArrowUpRight,
+  AtSign,
+  BriefcaseBusiness,
+  Code2,
+  Coffee,
+  Download,
+  House,
+  Mail,
+  Moon,
+  Sparkles,
+  Sun,
+  UserRound,
+} from "lucide-react";
+import { useState } from "react";
+
+const navigation = [
+  { label: "Home", icon: House, href: "#home" },
+  { label: "About", icon: UserRound, href: "#about" },
+  { label: "Work", icon: BriefcaseBusiness, href: "#work" },
+  { label: "Contact", icon: Mail, href: "#contact" },
+];
 
 export default function Home() {
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className={`portfolio-shell ${darkMode ? "theme-dark" : ""}`}>
+      <aside className="sidebar">
+        <div className="profile-block">
+          <div className="profile-mark" aria-label="Alex Morgan portrait placeholder">
+            AM
+          </div>
+          <h1>Alex Morgan</h1>
+          <p>Product-minded developer</p>
+          <div className="social-links">
+            <a href="#contact" aria-label="Professional profile"><AtSign size={16} /></a>
+            <a href="#work" aria-label="Code projects"><Code2 size={16} /></a>
+            <a href="#contact" aria-label="Email"><Mail size={16} /></a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <nav className="side-nav" aria-label="Primary navigation">
+          {navigation.map(({ label, icon: Icon, href }, index) => (
+            <a className={index === 0 ? "active" : ""} href={href} key={label}>
+              <Icon size={17} strokeWidth={1.8} />
+              <span>{label}</span>
+            </a>
+          ))}
+          <a href="#contact"><Download size={17} strokeWidth={1.8} /><span>Download CV</span></a>
+        </nav>
+
+        <div className="sidebar-footer">
+          <p>Available for select projects</p>
+          <span><i /> Based in Toronto, Canada</span>
         </div>
+      </aside>
+
+      <main className="main-content">
+        <header className="topbar">
+          <span className="eyebrow"><Sparkles size={14} /> Portfolio / 2024</span>
+          <button className="theme-toggle" onClick={() => setDarkMode((value) => !value)} aria-label="Toggle color theme">
+            {darkMode ? <Sun size={16} /> : <Moon size={16} />}
+            <span>{darkMode ? "Light" : "Night"}</span>
+          </button>
+        </header>
+
+        <section className="hero" id="home">
+          <div className="hero-glow glow-one" />
+          <div className="hero-glow glow-two" />
+          <div className="hero-copy">
+            <p className="kicker">Hello, I&apos;m Alex <span className="wave">✦</span></p>
+            <h2>Building digital<br /><em>experiences</em> with care.</h2>
+            <p className="hero-description">I&apos;m a full-stack developer who turns complex ideas into clear, useful, and memorable products.</p>
+            <div className="hero-actions">
+              <a className="primary-button" href="#work">Explore my work <ArrowUpRight size={17} /></a>
+              <a className="text-button" href="#contact">Let&apos;s talk <span>↗</span></a>
+            </div>
+          </div>
+          <div className="hero-note"><span>01</span><p>Curious by nature.<br />Precise by practice.</p></div>
+          <div className="scroll-cue"><span /> Scroll to explore</div>
+        </section>
+
+        <section className="intro-section" id="about">
+          <div className="section-label">A little about me</div>
+          <div className="intro-content"><h3>Good work lives<br />at the intersection of <span>curiosity</span> and craft.</h3><p>With 6+ years across startups and studios, I help teams find the simplest path from a rough idea to something people genuinely enjoy using.</p></div>
+        </section>
+
+        <section className="work-section" id="work">
+          <div className="section-heading"><div className="section-label">Selected work</div><a href="#contact">View all projects <ArrowUpRight size={16} /></a></div>
+          <div className="project-grid"><article><div className="project-visual visual-coral"><span>01</span><strong>Folio</strong></div><h4>Folio — personal finance, made human</h4><p>Product design · Development</p></article><article><div className="project-visual visual-lime"><span>02</span><strong>Field Notes</strong></div><h4>Field Notes — a slower way to plan</h4><p>Branding · Web design</p></article></div>
+        </section>
+
+        <section className="contact-section" id="contact"><div><div className="section-label">Have a project in mind?</div><h3>Let&apos;s make something<br /><span>worth remembering.</span></h3></div><a className="contact-button" href="mailto:hello@alexmorgan.dev"><Mail size={18} /> Get in touch</a></section>
+        <footer><span>© 2024 Alex Morgan</span><span>Made with intention <Coffee size={14} /></span></footer>
       </main>
     </div>
   );
